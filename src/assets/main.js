@@ -1,9 +1,15 @@
 let answer = document.getElementById('answer');
 let attempt = document.getElementById('attempt');
 
+console.log(answer.value);
+console.log(attempt.value);
+
 function guess() {
   let input = document.getElementById('user-guess');
-  //add functionality to guess function here
+
+  if (!answer.value || !attempt.value) {
+    setHiddenFields();
+  }
 }
 
 function setHiddenFields() {
@@ -16,6 +22,7 @@ function setHiddenFields() {
   }
 
   answer.value = randomNumber;
+  attempt.value = 0;
 }
 
 // Test
