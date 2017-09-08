@@ -1,5 +1,6 @@
 let answer = document.getElementById('answer');
 let attempt = document.getElementById('attempt');
+let message = document.getElementById('message');
 
 console.log(answer.value);
 console.log(attempt.value);
@@ -23,6 +24,19 @@ function setHiddenFields() {
 
   answer.value = randomNumber;
   attempt.value = 0;
+}
+
+function setMessage(text) {
+  message.innerHTML = text;
+}
+
+function validateInput(number) {
+  if (number.length == 4) {
+    return true;
+  } else {
+    setMessage('Guesses must be exactly 4 characters long.');
+    return false;
+  }
 }
 
 // Test
