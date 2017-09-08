@@ -7,7 +7,15 @@ function guess() {
 }
 
 function setHiddenFields() {
-  answer.value = Math.floor(Math.random() * 10000);
+  let randomNumber = Math.floor(Math.random() * 10000);
+
+  randomNumber = randomNumber.toString();
+
+  while (randomNumber.length < 4) {
+    randomNumber = `0${randomNumber}`;
+  }
+
+  answer.value = randomNumber;
 }
 
 // Test
