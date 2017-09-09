@@ -2,6 +2,9 @@ let answer = document.getElementById('answer');
 let attempt = document.getElementById('attempt');
 let message = document.getElementById('message');
 let results = document.getElementById('results');
+let code = document.getElementById('code');
+let guessing = document.getElementById('guessing-div');
+let replay = document.getElementById('replay-div');
 
 function guess() {
   let input = document.getElementById('user-guess');
@@ -18,8 +21,12 @@ function guess() {
 
   if (getResults(input.value)) {
     setMessage('You Win! :)');
+    showAnswer(true);
+    showReplay();
   } else if (attempt.value >= 10) {
     setMessage('You Lose! :(');
+    showAnswer(false);
+    showReplay();
   } else {
     setMessage('Incorrect, try again.');
   }
@@ -58,7 +65,8 @@ function getResults(input) {
   const inputValuesLength = inputValues.length; // Input length
   let countCorrect = 0;
 
-  let result = '<div class="row"><span class="col-md-6">';
+  let result = '<div class="row"><span class="col-md-6">' + input
+    + '</span><span class="col-md-6">';
   for (let i = 0; i < inputValuesLength; i++) {
     if (inputValues[i] == answerValues[i]) {
       result += '<span class="glyphicon glyphicon-ok"></span>';
@@ -69,9 +77,9 @@ function getResults(input) {
       result += '<span class="glyphicon glyphicon-remove"></span>';
     }
   }
-  result += '</div>';
+  result += '</span></div>';
 
-  results.innerHTML = result;
+  results.innerHTML += result;
 
   if (countCorrect === 4) {
     return true;
@@ -80,7 +88,23 @@ function getResults(input) {
   }
 }
 
-// Test
+function showAnswer(result) {
+  code.innerHTML = answer.value;
+
+  if (result) {
+    code.className += ' success';
+  } else {
+    code.className += ' failure';
+  }
+}
+
+function showReplay() {
+  guessing.style.display = 'none';
+  replay.style.display = 'block';
+}
+
+
+/* Test
 var test = function() {
   const max = 10000; // 10000 not included
   let numbers = [], sizes = [], i = 0, j = 0;
@@ -97,3 +121,4 @@ var test = function() {
   console.log(numbers);
   console.log(sizes);
 };
+*/
