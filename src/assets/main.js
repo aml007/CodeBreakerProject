@@ -2,9 +2,6 @@ let answer = document.getElementById('answer');
 let attempt = document.getElementById('attempt');
 let message = document.getElementById('message');
 
-console.log(answer.value);
-console.log(attempt.value);
-
 function guess() {
   let input = document.getElementById('user-guess');
 
@@ -12,7 +9,7 @@ function guess() {
     setHiddenFields();
   }
 
-  if (!validateInput(input)) {
+  if (!validateInput(input.value)) {
     return false;
   } else {
     attempt.value++;
