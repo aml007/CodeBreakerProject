@@ -15,6 +15,14 @@ function guess() {
   } else {
     attempt.value++;
   }
+
+  if (getResults(input.value)) {
+    setMessage('You Win! :)');
+  } else if (attempt.value >= 10) {
+    setMessage('You Lose! :(');
+  } else {
+    setMessage('Incorrect, try again.');
+  }
 }
 
 function setHiddenFields() {
@@ -48,11 +56,13 @@ function getResults(input) {
   const answerValues = answerValue.split('');
   const inputValues = input.split(''); // Get each number of user guess
   const inputValuesLength = inputValues.length; // Input length
+  let countCorrect = 0;
 
   let result = '<div class="row"><span class="col-md-6">';
   for (let i = 0; i < inputValuesLength; i++) {
     if (inputValues[i] == answerValues[i]) {
       result += '<span class="glyphicon glyphicon-ok"></span>';
+      countCorrect++;
     } else if (answerValue.indexOf(inputValues[i]) != -1) {
       result += '<span class="glyphicon glyphicon-transfer"></span>';
     } else {
@@ -62,6 +72,12 @@ function getResults(input) {
   result += '</div>';
 
   results.innerHTML = result;
+
+  if (countCorrect === 4) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // Test
